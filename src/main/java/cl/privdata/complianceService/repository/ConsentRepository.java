@@ -2,8 +2,9 @@ package cl.privdata.complianceService.repository;
 
 import java.util.UUID;
 
-import org.springframework.boot.data.autoconfigure.web.DataWebProperties.Pageable;
+
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import cl.privdata.complianceService.model.Consent;
