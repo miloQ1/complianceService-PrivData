@@ -3,7 +3,7 @@ package cl.privdata.complianceService.model;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import org.springframework.data.annotation.Id;
+
 
 import cl.privdata.complianceService.model.enums.ConsentEventType;
 import cl.privdata.complianceService.model.enums.ConsentStatus;
@@ -13,6 +13,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
