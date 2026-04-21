@@ -3,9 +3,10 @@ package cl.privdata.complianceService.DTO.request;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import org.antlr.v4.runtime.misc.NotNull;
+
 
 import cl.privdata.complianceService.model.enums.CollectionMethod;
+import jakarta.validation.constraints.NotNull;
 
 public class ConsentCreateRequestDTO {
 
