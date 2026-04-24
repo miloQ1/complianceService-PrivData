@@ -1,3 +1,148 @@
+### Atributos de las entidades principales
+
+#### Consent
+| Campo              | Tipo de dato         | Descripción                                      |
+|--------------------|---------------------|--------------------------------------------------|
+| id                 | UUID                | Identificador único                              |
+| organizationId     | UUID                | Organización                                     |
+| dataSubjectId      | UUID                | Sujeto de datos                                  |
+| purposeId          | UUID                | Propósito de procesamiento                       |
+| policyVersionId    | UUID                | Versión de política                              |
+| status             | ConsentStatus (enum)| Estado del consentimiento                        |
+| grantedAt          | LocalDateTime       | Fecha de otorgamiento                            |
+| revokedAt          | LocalDateTime       | Fecha de revocación                              |
+| expiresAt          | LocalDateTime       | Fecha de expiración                              |
+| collectionMethod   | CollectionMethod    | Método de recolección                            |
+| evidenceHash       | String              | Hash de evidencia                                |
+| evidenceUrl        | String              | URL de evidencia                                 |
+| notes              | String              | Notas adicionales                                |
+| createdAt          | LocalDateTime       | Fecha de creación                                |
+| updatedAt          | LocalDateTime       | Fecha de actualización                           |
+
+#### ConsentEvent
+| Campo              | Tipo de dato         | Descripción                                      |
+|--------------------|---------------------|--------------------------------------------------|
+| id                 | UUID                | Identificador único                              |
+| consentId          | UUID                | Consentimiento asociado                          |
+| eventType          | ConsentEventType    | Tipo de evento                                   |
+| previousStatus     | ConsentStatus       | Estado previo                                    |
+| newStatus          | ConsentStatus       | Nuevo estado                                     |
+| eventTimestamp     | LocalDateTime       | Fecha/hora del evento                            |
+| performedByUserId  | UUID                | Usuario que realizó la acción                    |
+| channel            | String              | Canal (web, móvil, etc.)                         |
+| ipAddress          | String              | IP de origen                                     |
+| userAgent          | String              | User agent                                       |
+| textSnapshot       | String              | Texto de snapshot                                |
+| evidenceHash       | String              | Hash de evidencia                                |
+| evidenceUrl        | String              | URL de evidencia                                 |
+| detailsJson        | String              | Detalles adicionales en JSON                     |
+
+#### ConsentDataCategory
+| Campo                  | Tipo de dato | Descripción                                      |
+|------------------------|--------------|--------------------------------------------------|
+| id                     | UUID         | Identificador único                              |
+| consentId              | UUID         | Consentimiento asociado                          |
+| personalDataCategoryId | UUID         | Categoría de dato personal asociada              |
+
+#### DataSubject
+| Campo           | Tipo de dato     | Descripción                                      |
+|-----------------|------------------|--------------------------------------------------|
+| id              | UUID             | Identificador único                              |
+| organizationId  | UUID             | Organización                                     |
+| firstName       | String           | Nombre                                           |
+| lastName        | String           | Apellido                                         |
+| documentType    | String           | Tipo de documento                                |
+| documentNumber  | String           | Número de documento                              |
+| email           | String           | Correo electrónico                               |
+| phone           | String           | Teléfono                                         |
+| address         | String           | Dirección                                        |
+| status          | DataSubjectStatus| Estado del sujeto de datos                       |
+| createdAt       | LocalDateTime    | Fecha de creación                                |
+| updatedAt       | LocalDateTime    | Fecha de actualización                           |
+
+#### PersonalDataCategory
+| Campo           | Tipo de dato     | Descripción                                      |
+|-----------------|------------------|--------------------------------------------------|
+| id              | UUID             | Identificador único                              |
+| organizationId  | UUID             | Organización                                     |
+| name            | String           | Nombre de la categoría                           |
+| description     | String           | Descripción                                      |
+| sensitive       | boolean          | Indica si es dato sensible                       |
+| active          | boolean          | Activa/inactiva                                  |
+| createdAt       | LocalDateTime    | Fecha de creación                                |
+| updatedAt       | LocalDateTime    | Fecha de actualización                           |
+
+#### PolicyVersion
+| Campo           | Tipo de dato     | Descripción                                      |
+|-----------------|------------------|--------------------------------------------------|
+| id              | UUID             | Identificador único                              |
+| organizationId  | UUID             | Organización                                     |
+| code            | String           | Código de la política                            |
+| title           | String           | Título                                           |
+| contentSnapshot | String           | Contenido de la política                         |
+| versionLabel    | String           | Etiqueta de versión                              |
+| effectiveFrom   | LocalDateTime    | Vigencia                                         |
+| active          | boolean          | Activa/inactiva                                  |
+| createdAt       | LocalDateTime    | Fecha de creación                                |
+| updatedAt       | LocalDateTime    | Fecha de actualización                           |
+
+#### ProcessingPurpose
+| Campo           | Tipo de dato     | Descripción                                      |
+|-----------------|------------------|--------------------------------------------------|
+| id              | UUID             | Identificador único                              |
+| organizationId  | UUID             | Organización                                     |
+| code            | String           | Código del propósito                             |
+| name            | String           | Nombre                                           |
+| description     | String           | Descripción                                      |
+| legalBasis      | LegalBasis       | Base legal                                       |
+| required        | boolean          | Es requerido                                     |
+| active          | boolean          | Activo/inactivo                                  |
+| createdAt       | LocalDateTime    | Fecha de creación                                |
+| updatedAt       | LocalDateTime    | Fecha de actualización                           |
+
+#### ProcessingActivity
+| Campo                | Tipo de dato                 | Descripción                                      |
+|----------------------|------------------------------|--------------------------------------------------|
+| id                   | UUID                         | Identificador único                              |
+| organizationId       | UUID                         | Organización                                     |
+| name                 | String                       | Nombre de la actividad                           |
+| description          | String                       | Descripción                                      |
+| purposeId            | UUID                         | Propósito asociado                               |
+| responsiblePersonId  | UUID                         | Responsable                                      |
+| storageLocation      | String                       | Ubicación de almacenamiento                      |
+| retentionPeriodDays  | Integer                      | Días de retención                                |
+| internationalTransfer| boolean                      | Transferencia internacional                      |
+| thirdPartySharing    | boolean                      | Compartido con terceros                          |
+| riskLevel            | ProcessingActivityRiskLevel  | Nivel de riesgo                                  |
+| status               | ProcessingActivityStatus      | Estado                                           |
+| createdAt            | LocalDateTime                | Fecha de creación                                |
+| updatedAt            | LocalDateTime                | Fecha de actualización                           |
+
+#### ProcessingActivityDataCategory
+| Campo                  | Tipo de dato | Descripción                                      |
+|------------------------|--------------|--------------------------------------------------|
+| id                     | UUID         | Identificador único                              |
+| processingActivityId   | UUID         | Actividad de procesamiento asociada               |
+| personalDataCategoryId | UUID         | Categoría de dato personal asociada              |
+| createdAt              | LocalDateTime| Fecha de creación                                |
+
+#### SecurityMeasure
+| Campo                | Tipo de dato         | Descripción                                      |
+|----------------------|---------------------|--------------------------------------------------|
+| id                   | UUID                | Identificador único                              |
+| processingActivityId | UUID                | Actividad de procesamiento asociada              |
+| name                 | String              | Nombre de la medida                              |
+| description          | String              | Descripción                                      |
+| measureType          | SecurityMeasureType | Tipo de medida                                   |
+| implemented          | boolean             | Si está implementada                             |
+| createdAt            | LocalDateTime       | Fecha de creación                                |
+| updatedAt            | LocalDateTime       | Fecha de actualización                           |
+
+---
+
+## Resumen de la API
+
+La API RESTful de complianceService permite gestionar el ciclo de vida de consentimientos, sujetos de datos, categorías de datos personales, propósitos, actividades de procesamiento, versiones de políticas y medidas de seguridad. Cada recurso cuenta con endpoints CRUD y filtros avanzados. Todas las operaciones quedan auditadas mediante eventos y se garantiza la trazabilidad y cumplimiento normativo.
 ## Modelo de Datos Principal
 
 El modelo de datos está compuesto por las siguientes entidades principales:
